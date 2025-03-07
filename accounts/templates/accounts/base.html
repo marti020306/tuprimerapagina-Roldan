@@ -28,7 +28,8 @@
                         <li class="nav-item">
                             <form action="{% url 'logout' %}" method="post" class="d-inline">
                                 {% csrf_token %}
-                                <button class="btn btn-link nav-link" type="submit">Cerrar sesión</button>
+                                <a href="{% url 'logout' %}" class="btn btn-danger">Cerrar Sesión</a>
+
                             </form>
                         </li>
                     {% else %}
