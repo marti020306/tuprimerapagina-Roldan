@@ -1,0 +1,18 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+<h2>{% if object %}Editar Post{% else %}Nuevo Post{% endif %}</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Guardar</button>
+</form>
+
+<a href="{% url 'post_list' %}" class="btn btn-secondary">Cancelar</a>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Publicar</button>
+</form>
+<a href="{% url 'post_list' %}" class="btn btn-secondary">Cancelar</a>
+{% endblock %}

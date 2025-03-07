@@ -5,7 +5,7 @@ from .models import Autor, Categoria, Post
 class AutorForm(forms.ModelForm):
     class Meta:
         model = Autor
-        fields = ['nombre', 'apellido', 'email']
+        fields = ['nombre', 'apellido']
 
 
 class CategoriaForm(forms.ModelForm):
@@ -17,7 +17,7 @@ class CategoriaForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['titulo', 'contenido', 'autor', 'categoria']
+        fields = ['titulo', 'contenido', 'autor', 'categoria', 'imagen']
 
 
 class BusquedaPostForm(forms.Form):

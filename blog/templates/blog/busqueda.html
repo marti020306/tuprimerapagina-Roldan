@@ -1,18 +1,20 @@
-{% extends 'blog/base.html' %}
+{% extends 'accounts/base.html' %}
 
 {% block content %}
-<h2>Buscar Post</h2>
-<form method="get">
+  <h2>Buscar Posts</h2>
+  <form method="get">
     {{ form.as_p }}
     <button type="submit">Buscar</button>
-</form>
+  </form>
 
-{% if resultados %}
-    <h3>Resultados:</h3>
+  {% if resultados %}
+    <h3>Resultados de la búsqueda:</h3>
     <ul>
-    {% for post in resultados %}
-        <li>{{ post.titulo }} - {{ post.autor }}</li>
-    {% endfor %}
+      {% for post in resultados %}
+        <li><a href="{% url 'post_detail' post.pk %}">{{ post.titulo }}</a></li>
+      {% endfor %}
     </ul>
-{% endif %}
+  {% elif no_resultados %}
+    <p>Este post no existe.</p>
+  {% endif %}
 {% endblock %}

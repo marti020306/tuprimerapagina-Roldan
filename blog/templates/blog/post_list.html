@@ -1,0 +1,29 @@
+{% extends "accounts/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Lista de Publicaciones</h1>
+
+    <!-- Buscador -->
+    <form method="GET" action="{% url 'post_list' %}" class="mb-3">
+        <input type="text" name="query" placeholder="Buscar posts..." class="form-control" value="{{ request.GET.query }}">
+        <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+    </form>
+
+    {% if posts %}
+        <ul class="list-group">
+            {% for post in posts %}
+                <li class="list-group-item">
+                    <h3>{{ post.titulo }}</h3>
+                    <p>Publicado el: {{ post.fecha_publicacion|date:"d M Y" }} | Autor: {{ post.autor }}</p>
+                    <a href="{% url 'post_detail' post.pk %}" class="btn btn-secondary">Leer más</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            ⚠ No hay publicaciones disponibles.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

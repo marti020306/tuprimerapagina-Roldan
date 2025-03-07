@@ -17,14 +17,42 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blog import views
+from blog.views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView
+from django.contrib import admin
+from django.urls import path, include
+from blog import views
+from django.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
+from django.conf import settings
+from django.urls import path
+
+
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('', views.home, name='home'),
+    path('', views.home, name='home'),
     path('agregar_autor/', views.agregar_autor, name='agregar_autor'),
     path('agregar_categoria/', views.agregar_categoria, name='agregar_categoria'),
     path('agregar_post/', views.agregar_post, name='agregar_post'),
     path('buscar_post/', views.buscar_post, name='buscar_post'),
+    path('posts/', PostListView.as_view(), name='post_list'),
+    path('posts/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
+    path('posts/new/', PostCreateView.as_view(), name='post_create'),
+    path('posts/<int:pk>/edit/', PostUpdateView.as_view(), name='post_update'),
+    path('posts/<int:pk>/delete/', PostDeleteView.as_view(), name='post_delete'),
+    path('accounts/', include('accounts.urls')),
+    path('about/', include('blog.urls')),
+    path('post/<int:pk>/edit/', views.PostUpdateView.as_view(), name='post_edit'),
+    path('post/<int:pk>/delete/', views.PostDeleteView.as_view(), name='post_delete'),
+    
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    
+
+
